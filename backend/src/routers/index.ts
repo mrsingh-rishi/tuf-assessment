@@ -10,7 +10,7 @@ const router = Router();
 router.use("/users", userRouter);
 
 // Register the loginRouter to handle routes prefixed with "/login"
-router.use("/login", loginRouter);
+router.use("/auth", loginRouter);
 
 // Register the bannerRouter to handle routes prefixed with "/banners"
 router.use("/banners", bannerRouter);
