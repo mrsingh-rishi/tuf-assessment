@@ -5,10 +5,33 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js" // Specifies that the Prisma Client should be generated for JavaScript/TypeScript
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "postgresql" // Specifies PostgreSQL as the database provider
+  url      = env("DATABASE_URL") // Retrieves the database connection URL from the environment variables
+}
+
+// Define the User model
+model User {
+  id        Int      @id @default(autoincrement()) // Unique identifier for the User, auto-incremented
+  email     String   @unique // Email must be unique across the User model
+  password  String   // Password for authentication
+  name      String?  // Optional field for the user's name
+  createdAt DateTime @default(now()) // Timestamp for when the User was created
+  updatedAt DateTime @updatedAt // Timestamp for when the User was last updated
+
+  // Optional relationships or additional fields can be added here
+}
+
+// Define the Banner model
+model Banner {
+  id        Int      @id @default(autoincrement()) // Unique identifier for the Banner, auto-incremented
+  title     String   // Title of the banner
+  imageUrl  String   // URL of the banner image
+  createdAt DateTime @default(now()) // Timestamp for when the Banner was created
+  updatedAt DateTime @updatedAt // Timestamp for when the Banner was last updated
+
+  // Optional relationships or additional fields can be added here
 }
