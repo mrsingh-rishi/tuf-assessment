@@ -7,7 +7,7 @@ export const authMiddleware = (
   req: AuthRequest, // Custom request object
   res: Response, // Express response object
   next: NextFunction // Next function to pass control to the next middleware
-): void => {
+) => {
   // Retrieve the Authorization header from the request
   const authHeader = req.headers.authorization;
 
@@ -26,7 +26,7 @@ export const authMiddleware = (
   // `process.env.JWT_SECRET` should be replaced with your actual secret key or set as an environment variable
   jwt.verify(
     token,
-    process.env.JWT_SECRET || "your_jwt_secret",
+    process.env.JWT_SECRET || "your_jwt_secret_key",
     (err, decoded) => {
       // If there is an error in token verification, send a 401 Unauthorized response
       if (err) {

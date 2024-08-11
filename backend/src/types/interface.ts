@@ -11,5 +11,5 @@ export interface AuthRequest extends Request {
    * - `null`: If the token is not present or authentication fails.
    * - `undefined`: If the `user` property has not been set by middleware.
    */
-  user: string | JwtPayload | null | undefined;
+  user?: string | JwtPayload | null | undefined;
 }
