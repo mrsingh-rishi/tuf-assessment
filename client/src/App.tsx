@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import DashboardScreen from "./components/DashboardScreen";
+import UpdateScreen from "./components/UpdateScree";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [drawerOpen, setDrawerOpen] = useState(true);
+  const [bannerDescription, setBannerDescription] = useState("");
+  const [bannerLink, setBannerLink] = useState("");
+  const [timer, setTimer] = useState(0);
+  const [countdown, setCountdown] = useState(0);
+  const [bannerVisible, setBannerVisible] = useState(true);
+
+  const handleDrawerOpen = () => setDrawerOpen(true);
+  const handleDrawerClose = () => setDrawerOpen(false);
+
+  const handleTimerUpdate = () => {
+    setCountdown(timer);
+  };
+
+  const handleBannerVisibility = () => {
+    setBannerVisible(!bannerVisible);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="dark:bg-gray-900 dark:text-gray-200 min-h-screen">
+      <DashboardScreen
+        open={drawerOpen}
+        handleDrawerOpen={handleDrawerOpen}
+        handleDrawerClose={handleDrawerClose}
+      />
+      <UpdateScreen
+        bannerDescription={bannerDescription}
+        bannerLink={bannerLink}
+        timer={timer}
+        setBannerDescription={setBannerDescription}
+        setBannerLink={setBannerLink}
+        setTimer={setTimer}
+        setCountdown={setCountdown}
+        countdown={countdown}
+        handleTimerUpdate={handleTimerUpdate}
+        bannerVisible={bannerVisible}
+        handleBannerVisibility={handleBannerVisibility}
+      />
+    </div>
+  );
+};
 
-export default App
+export default App;
