@@ -12,24 +12,24 @@ interface BannerProps {
 const Banner: React.FC<BannerProps> = ({ banners }) => {
   return (
     <div>
-      {banners.map((banner) =>
-        banner.visible ? (
+      {banners.length > 0 ? (
+        banners.map((banner) => (
           <div
             key={banner.id}
-            className="bg-blue-500 text-white p-4 rounded mb-4"
+            className={`p-4 mb-4 rounded ${
+              banner.visible
+                ? "bg-blue-500 text-white"
+                : "bg-gray-500 text-white"
+            }`}
           >
             <h3 className="text-xl font-bold">{banner.description}</h3>
-            <p className="text-lg">Time left: {banner.countdown}s</p>
+            <p className="text-lg">
+              {banner.visible ? `Time left: ${banner.countdown}s` : "Inactive"}
+            </p>
           </div>
-        ) : (
-          <div
-            key={banner.id}
-            className="bg-gray-500 text-white p-4 rounded mb-4"
-          >
-            <h3 className="text-xl font-bold">{banner.description}</h3>
-            <p className="text-lg">Inactive</p>
-          </div>
-        )
+        ))
+      ) : (
+        <p>No banners available.</p>
       )}
     </div>
   );
